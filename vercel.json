@@ -8,8 +8,8 @@
   ],
   "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "src/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/src/index.ts"
     }
   ]
 }
