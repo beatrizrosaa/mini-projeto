@@ -14,7 +14,7 @@ app.use(express.json());
 connectDB();
 
 // Usar as rotas
-app.use(routes);
+app.use('/api', routes);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
