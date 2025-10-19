@@ -1,10 +1,11 @@
 import User, { IUser } from '../model/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import type { Secret, SignOptions } from 'jsonwebtoken';
 import 'dotenv/config';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN!;
+const JWT_SECRET = process.env.JWT_SECRET as Secret;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN as SignOptions['expiresIn'];
 
 class AuthService {
     public async register(userData: IUser): Promise<IUser> {
@@ -41,7 +42,12 @@ class AuthService {
             throw new Error('Credenciais inválidas.');
         }
 
+
         const payload = { id: user.id };
+
+        if (!JWT_SECRET || !JWT_EXPIRES_IN) {
+            throw new Error('Variáveis de ambiente JWT não estão definidas!');
+        }
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
         console.log(`[Service] Login bem-sucedido e token gerado para: ${email}`);
