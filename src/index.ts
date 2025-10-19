@@ -17,6 +17,10 @@ connectDB();
 // Usar as rotas
 app.use('/api', routes);
 
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'API is working!' });
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
