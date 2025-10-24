@@ -35,7 +35,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         }
         
         // Se quiser, pode anexar o id do usuário na requisição
-        // (req as any).userId = (decoded as any).id;
+        (req as any).userId = (decoded as any).id;
 
         console.log('[AuthMiddleware] Acesso autorizado para rota protegida.');
         return next();

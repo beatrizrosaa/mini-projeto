@@ -10,6 +10,8 @@ class AuthController {
         } catch (error: any) {
             if (error.message === 'E-mail já cadastrado.') {
                 return res.status(409).json({ message: error.message }); // 409 Conflict
+            } else if (error.name === 'ValidationError') {
+                return res.status(400).json({ message: 'Dados inválidos.', details: error.message });
             }
             return res.status(500).json({ message: 'Erro interno no servidor.' });
         }
