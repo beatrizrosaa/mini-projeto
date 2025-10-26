@@ -6,7 +6,7 @@ A aplicação é configurada para se conectar tanto a um banco de dados MongoDB 
 🎥 Demonstração do Projeto
 Assista a uma demonstração completa ou um tutorial deste projeto no YouTube:
 
-(https://youtu.be/2CrnVlwn1FM?si=VLXBNsBpMbSh8I5d)
+(https://www.youtube.com/watch?v=WK0QsqDMhIE)
 
 ✨ Features
 Registro de Usuário: Criação de novos usuários com senha criptografada (bcrypt).
