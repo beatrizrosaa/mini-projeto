@@ -155,6 +155,85 @@ JSON
   "message": "Esta é uma rota protegida.",
   "userId": "..."
 }
+
+CRUD de Contatos (/api/contacts)
+Todas as rotas de contatos são protegidas e exigem um token JWT no cabeçalho Authorization: Bearer <seu_token>.
+
+POST /api/contacts
+Cria um novo contato para o usuário autenticado.
+
+Body (JSON):
+
+JSON
+
+{
+  "name": "Primeiro Contato",
+  "email": "contato@email.com",
+  "phone": "99999-8888"
+}
+Resposta (201 Created): Retorna o objeto do contato criado, incluindo seu _id e o user (ID do dono).
+
+GET /api/contacts
+Lista todos os contatos pertencentes ao usuário autenticado.
+
+Query Params (Opcional para filtro):
+
+GET /api/contacts?name=Primeiro (Busca por nome, case-insensitive)
+
+GET /api/contacts?email=contato (Busca por email, case-insensitive)
+
+Resposta (200 OK):
+
+JSON
+
+[
+  { "_id": "...", "name": "Primeiro Contato", "email": "contato@email.com", ... },
+  { "_id": "...", "name": "Segundo Contato", "email": "outro@email.com", ... }
+]
+GET /api/contacts/:id
+Busca um contato específico pelo ID.
+
+Resposta (200 OK): Retorna o objeto do contato.
+
+Resposta de Erro (404 Not Found): Se o contato não for encontrado ou não pertencer ao usuário logado.
+
+PUT /api/contacts/:id
+Substitui todos os dados de um contato existente. (Campos omitidos serão definidos como nulos).
+
+Body (JSON):
+
+JSON
+
+{
+  "name": "Contato Atualizado (PUT)",
+  "phone": "1122223333"
+}
+Resposta (200 OK): Retorna o objeto do contato com os dados atualizados.
+
+Resposta de Erro (404 Not Found): Se o contato não pertencer ao usuário.
+
+PATCH /api/contacts/:id
+Atualiza parcialmente um contato existente. (Apenas os campos enviados são modificados).
+
+Body (JSON):
+
+JSON
+
+{
+  "email": "email-novo@patch.com"
+}
+Resposta (200 OK): Retorna o objeto do contato com o campo atualizado.
+
+Resposta de Erro (404 Not Found): Se o contato não pertencer ao usuário.
+
+DELETE /api/contacts/:id
+Deleta um contato.
+
+Resposta (204 No Content): Resposta de sucesso sem corpo.
+
+Resposta de Erro (404 Not Found): Se o contato não pertencer ao usuários
+
+
 🌐 Deploy na Vercel
 Este projeto está configurado para deploy contínuo na Vercel através do arquivo vercel.json.
 
