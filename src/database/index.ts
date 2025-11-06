@@ -1,6 +1,7 @@
 // src/database/index.ts
-import mongoose from 'mongoose';
 import 'dotenv/config';
+import mongoose from 'mongoose';
+
 
 // Escolha a URI baseada no ambiente (ex: produção vs desenvolvimento)
 // const MONGO_URI = process.env.NODE_ENV === 'production' 
@@ -17,7 +18,10 @@ if (!MONGO_URI) {
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(MONGO_URI);
+        console.log('Conectando ao MongoDB...', MONGO_URI);
+        await mongoose.connect(MONGO_URI,{
+            dbName: 'minhaapi-cloud'
+        });
         console.log('MongoDB conectado com sucesso.');
     } catch (error) {
         console.error('Erro ao conectar com o MongoDB:', error);
